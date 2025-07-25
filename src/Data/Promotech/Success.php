@@ -9,5 +9,6 @@ class Success extends Data
     public function __construct(
         public string $message,
         public string $description,
+        public string $code,
     ) {}
 }

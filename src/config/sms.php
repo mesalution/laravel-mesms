@@ -14,6 +14,7 @@ return [
                 'url' => env('PROMOTECH_URL', 'http://apisms.promotech.co.th'),
                 'username' => env('PROMOTECH_USERNAME'),
                 'password' => env('PROMOTECH_PASSWORD'),
+                'basicToken' => env('PROMOTECH_BASIC_TOKEN'),
                 'otcId' => env('PROMOTECH_OTC_ID'),
                 'senderName' => env('PROMOTECH_SENDER_NAME'),
             ],

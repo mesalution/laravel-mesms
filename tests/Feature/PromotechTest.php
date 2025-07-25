@@ -12,7 +12,6 @@ use Mesalution\LaravelMesms\Exceptions\InternalException;
 use Mesalution\LaravelMesms\Exceptions\ConnectionException;
 use Mesalution\LaravelMesms\Exceptions\BadResponseException;
 use Mesalution\LaravelMesms\Exceptions\ErrorCode;
-use Mesalution\LaravelMesms\Exceptions\ExternalException;
 use Mesalution\LaravelMesms\Exceptions\OtpException;
 
 class PromotechTest extends TestCase
@@ -44,7 +43,7 @@ class PromotechTest extends TestCase
             ],
             'otcId' => 'otc-id-test',
             'otpId' => '123456',
-            'referrenceCode' => 'ABCDEF'
+            'referenceCode' => 'ABCDEF'
         ];
         Http::fake([
             'https://fake-api.test/otp/requestOTP' => Http::response($mockResponse, 200),
@@ -82,7 +81,7 @@ class PromotechTest extends TestCase
             '*' => Http::response([
                 'success' => true,
                 'otpId' => null, // สมมุติว่าทำให้ from() สร้าง data ไม่ได้
-                'referrenceCode' => null
+                'referenceCode' => null
             ], 200),
         ]);
 
@@ -131,7 +130,7 @@ class PromotechTest extends TestCase
             ],
             'otcId' => 'otc-id-test',
             'otpId' => '123456',
-            'referrenceCode' => 'ABCDEF'
+            'referenceCode' => 'ABCDEF'
         ];
         Http::fake([
             'https://fake-api.test/otp/resendOTP' => Http::response($mockResponse, 200),
@@ -169,7 +168,7 @@ class PromotechTest extends TestCase
             '*' => Http::response([
                 'success' => true,
                 'otpId' => null, // สมมุติว่าทำให้ from() สร้าง data ไม่ได้
-                'referrenceCode' => null
+                'referenceCode' => null
             ], 200),
         ]);
 

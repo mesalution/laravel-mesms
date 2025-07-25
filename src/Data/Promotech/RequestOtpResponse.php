@@ -9,7 +9,7 @@ class RequestOtpResponse extends Data
     public function __construct(
         public string $otcId,
         public string $otpId,
-        public string $referrenceCode,
+        public string $referenceCode,
         public ?Success $success = null,
         public ?Error $error = null,
 

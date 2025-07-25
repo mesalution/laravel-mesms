@@ -4,7 +4,7 @@ namespace Mesalution\LaravelMesms;
 
 use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
-use Mesalution\LaravelMesms\Providers\FakeSms;
+use Mesalution\LaravelMesms\Contracts\Sms;
 
 class SmsServiceProvider extends ServiceProvider
 {

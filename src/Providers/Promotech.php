@@ -13,6 +13,7 @@ use Mesalution\LaravelMesms\Exceptions\ConnectionException;
 use Mesalution\LaravelMesms\Exceptions\InternalException;
 use Mesalution\LaravelMesms\Exceptions\BadResponseException;
 use Mesalution\LaravelMesms\Exceptions\ErrorCode;
+use Mesalution\LaravelMesms\Exceptions\ExpiredOtpException;
 use Mesalution\LaravelMesms\Exceptions\ExternalException;
 use Mesalution\LaravelMesms\Exceptions\InvalidOtpException;
 use Mesalution\LaravelMesms\Exceptions\OtpException;
@@ -26,6 +27,7 @@ class Promotech implements Sms
     protected ?string $url = null;
     protected ?string $username = null;
     protected ?string $password = null;
+    protected ?string $basicToken = null;
     protected ?string $otcId = null;
     protected ?string $senderName = null;
     protected PendingRequest $client;
@@ -39,7 +41,18 @@ class Promotech implements Sms
                 }
             }
         }
-        $this->client = Http::baseUrl($this->url)->withBasicAuth($this->username, $this->password)->acceptJson()->asJson();
+        $this->client = Http::baseUrl($this->url)->acceptJson()->asJson();
+        if (isset($this->username) && isset($this->password)) {
+            $this->client->withBasicAuth($this->username, $this->password);
+        } else if (isset($this->basicToken)) {
+            $this->client->withToken($this->basicToken, 'Basic');
+        }
+    }
+
+    public static function make(?array $options = null): static
+    {
+        $instance = new static($options);
+        return $instance;
     }
 
     protected function post(string $endpoint, array $body = []): array
@@ -115,7 +128,7 @@ class Promotech implements Sms
         try {
             $data = RequestOtpResponse::from($rawData);
             $this->checkSuccessAndErrorField($data);
-            $otp = new Otp($data->otpId, $data->referrenceCode);
+            $otp = new Otp($data->otpId, $data->referenceCode);
             return $otp;
         } catch (CannotCreateData $e) {
             throw $this->createBadResponseException($e, $endpoint, $body, $rawData);
@@ -146,7 +159,7 @@ class Promotech implements Sms
         try {
             $data = RequestOtpResponse::from($rawData);
             $this->checkSuccessAndErrorField($data);
-            $otp = new Otp($data->otpId, $data->referrenceCode);
+            $otp = new Otp($data->otpId, $data->referenceCode);
             return $otp;
         } catch (CannotCreateData $e) {
             throw $this->createBadResponseException($e, $endpoint, $body, $rawData);
@@ -177,7 +190,6 @@ class Promotech implements Sms
         $rawData = $this->post($endpoint, $body);
         try {
             $data = VerifyOtpResponse::from($rawData);
-            $this->checkSuccessAndErrorField($data);
             if ($data->result === false) {
                 if ($data->isErrorCount === true) {
                     throw new InvalidOtpException(
@@ -190,7 +202,7 @@ class Promotech implements Sms
                         ]
                     );
                 } else if ($data->isExprCode === true) {
-                    throw new OtpException(
+                    throw new ExpiredOtpException(
                         code: ErrorCode::PROMOTECH_OTP_EXPIRED,
                         provider: class_basename($this),
                         context: [

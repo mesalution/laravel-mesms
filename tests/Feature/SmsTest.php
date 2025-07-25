@@ -3,7 +3,6 @@
 namespace Mesalution\LaravelMesms\Tests\Feature;
 
 use PHPUnit\Util\Test;
-use Mesalution\LaravelMesms\Sms;
 use Mesalution\LaravelMesms\Data\Otp;
 use Mesalution\LaravelMesms\SmsManager;
 use Orchestra\Testbench\TestCase;
@@ -11,21 +10,23 @@ use Illuminate\Support\Facades\App;
 use Mesalution\LaravelMesms\SmsServiceProvider;
 use PHPUnit\Framework\Attributes\Group;
 use Mesalution\LaravelMesms\Exceptions\OtpException;
-use Mesalution\LaravelMesms\Contracts\Sms as SmsInterface;
+use Mesalution\LaravelMesms\Contracts\Sms;
 use Mesalution\LaravelMesms\Exceptions\VerifyOtpException;
 use Mesalution\LaravelMesms\Exceptions\RequestOtpException;
+use Mesalution\LaravelMesms\Providers\FakeSms;
 
 class SmsTest extends TestCase
 {
     protected function getPackageProviders($app)
     {
         return [
+            \Spatie\LaravelData\LaravelDataServiceProvider::class,
             SmsServiceProvider::class,
         ];
     }
-    protected function mockSmsDriver(callable $callback): void
+    protected function mockSmsDriver(string $class, callable $callback): void
     {
-        $mockDriver = $this->createMock(SmsInterface::class);
+        $mockDriver = $this->createMock($class);
         $callback($mockDriver);
 
         $mockManager = $this->createMock(SmsManager::class);
@@ -37,13 +38,13 @@ class SmsTest extends TestCase
     #[Group('sms_core')]
     public function test_request_otp_success()
     {
-        $this->mockSmsDriver(function ($mock) {
+        $this->mockSmsDriver(FakeSms::class, function ($mock) {
             $mock->method('requestOTP')->willReturn(
                 new Otp('otp-id-123', 'ref-code-abc')
             );
         });
 
-        $sms = new Sms('mock');
+        $sms = app(SmsManager::class)->driver();
         $otp = $sms->requestOTP('0812345678');
         $this->assertInstanceOf(Otp::class, $otp);
         $this->assertEquals('otp-id-123', $otp->id);
@@ -56,13 +57,13 @@ class SmsTest extends TestCase
     {
         $this->expectException(RequestOtpException::class);
 
-        $this->mockSmsDriver(function ($mock) {
+        $this->mockSmsDriver(FakeSms::class, function ($mock) {
             $mock->method('requestOTP')->willThrowException(
                 new RequestOtpException('mock error')
             );
         });
 
-        $sms = new Sms('mock');
+        $sms = app(SmsManager::class)->driver();
         $sms->requestOTP('0812345678');
     }
 
@@ -70,13 +71,13 @@ class SmsTest extends TestCase
     #[Group('sms_core')]
     public function test_resend_otp_success()
     {
-        $this->mockSmsDriver(function ($mock) {
+        $this->mockSmsDriver(FakeSms::class, function ($mock) {
             $mock->method('resendOTP')->willReturn(
                 new Otp('otp-id-999', 'ref-resend-xyz')
             );
         });
 
-        $sms = new Sms('mock');
+        $sms = app(SmsManager::class)->driver();
         $otp = $sms->resendOTP('otp-id-999');
 
         $this->assertInstanceOf(Otp::class, $otp);
@@ -87,46 +88,44 @@ class SmsTest extends TestCase
     #[Group('sms_core')]
     public function test_verify_otp_success()
     {
-        $this->mockSmsDriver(function ($mock) {
+        $this->mockSmsDriver(FakeSms::class, function ($mock) {
             $mock->method('verifyOTP');
         });
 
-        $sms = new Sms('mock');
-        $otp = $sms->verifyOTP('otp-id-123', '123456');
-
-        $this->assertTrue($otp->result);
-        $this->assertEquals('OTP verified successfully', $otp->message);
+        $sms = app(SmsManager::class)->driver();
+        $sms->verifyOTP('otp-id-123', '123456');
+        $this->assertTrue(true);
     }
 
     #[Test]
     #[Group('sms_core')]
-    public function test_verify_otp_failed_by_otp_exception()
+    public function test_verify_otp_failed_by_otp_exception_with_sms()
     {
-        $this->mockSmsDriver(function ($mock) {
+        $this->mockSmsDriver(FakeSms::class, function ($mock) {
             $mock->method('verifyOTP')->willThrowException(
                 new OtpException('Invalid code', 'OTP ไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง')
             );
         });
 
-        $sms = new Sms('mock');
+        $this->expectException(OtpException::class);
+        $this->expectExceptionMessage('Invalid code');
+        $sms = app(SmsManager::class)->driver();
         $otp = $sms->verifyOTP('otp-id-123', '000000');
-        $this->assertFalse($otp->result);
-        $this->assertEquals('OTP ไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง', $otp->message);
     }
 
     #[Test]
     #[Group('sms_core')]
     public function test_verify_otp_failed_by_other_exception()
     {
-        $this->expectException(VerifyOtpException::class);
+        $this->expectException(\RuntimeException::class);
 
-        $this->mockSmsDriver(function ($mock) {
+        $this->mockSmsDriver(FakeSms::class, function ($mock) {
             $mock->method('verifyOTP')->willThrowException(
                 new \RuntimeException('Something went wrong')
             );
         });
 
-        $sms = new Sms('mock');
+        $sms = app(SmsManager::class)->driver();
         $sms->verifyOTP('otp-id-123', '123456');
     }
 }
