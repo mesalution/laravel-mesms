@@ -1,4 +1,4 @@
-# Mesalution SMS
+# Mesalution - Laravel SMS
 
 [![Latest Version](https://img.shields.io/github/v/tag/mesalution/sms?label=version&sort=semver)](https://github.com/mesalution/sms/releases)
 [![License](https://img.shields.io/github/license/mesalution/sms)](LICENSE)
