@@ -1,0 +1,36 @@
+<?php
+
+namespace Mesalution\Sms\Exceptions;
+
+enum ErrorCode: int
+{
+    // Connection - 101xxx
+    case PROMOTECH_CONNECTION_REFUSED = 101001;
+    case PROMOTECH_CONNECTION_TIMEOUT = 101002;
+
+        // Authentication - 102xxx
+    case PROMOTECH_AUTH_FAILED = 102001;
+
+        // Client - 103xxx
+    case PROMOTECH_BAD_REQUEST = 103001;
+
+        // Bad Response - 104xxx
+    case PROMOTECH_BAD_RESPONSE = 104001;
+    case PROMOTECH_MISSING_SUCCESS_OR_ERROR_FIELD = 104002;
+
+        // External - 105xxx
+    case PROMOTECH_EXTERNAL_ERROR = 105001;
+    case PROMOTECH_NOT_CREDIT = 105002;
+    case PROMOTECH_INVALID_OTP_CONFIG = 105003;
+    case PROMOTECH_NUMBER_PREFIX_MISSING = 105004;
+    case PROMOTECH_NO_DATA_AVAILABLE_OTP = 105005;
+    case PROMOTECH_OVER_LIMIT_USAGE = 105006;
+    case PROMOTECH_OTP_EXPIRED = 105007;
+    case PROMOTECH_OTP_CONFIRMED = 105008;
+    case PROMOTECH_INVALID_NUMBER = 105009;
+    case PROMOTECH_INVALID_OTP_CODE = 105010;
+    case PROMOTECH_UNKNOWN = 105999;
+
+        // Internal - 106xxx
+    case PROMOTECH_INTERNAL_ERROR = 106001;
+}

@@ -1,0 +1,41 @@
+{
+    "name": "mesalution/sms",
+    "description": "A simple laravel package that helps you send SMS though various service providers",
+    "type": "library",
+    "require": {
+        "php": "^8.2",
+        "illuminate/support": "^11.0",
+        "spatie/laravel-data": "^4.0"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Mesalution\\Sms\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Mesalution\\Sms\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Mesalution\\Sms\\SmsServiceProvider"
+            ]
+        }
+    },
+    "authors": [
+        {
+            "name": "playerarm123",
+            "email": "anuwat_sukhsa@outlook.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require-dev": {
+        "orchestra/testbench": "^9.14"
+    },
+    "scripts": {
+        "test": "phpunit"
+    }
+}
