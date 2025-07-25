@@ -1,10 +1,10 @@
 <?php
 
-namespace Mesalution\Sms\Providers;
+namespace Mesalution\LaravelMesms\Providers;
 
 use Illuminate\Support\Str;
-use Mesalution\Sms\Data\Otp;
-use Mesalution\Sms\Contracts\Sms;
+use Mesalution\LaravelMesms\Data\Otp;
+use Mesalution\LaravelMesms\Contracts\Sms;
 
 class FakeSms implements Sms
 {

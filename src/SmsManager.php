@@ -1,9 +1,9 @@
 <?php
 
-namespace Mesalution\Sms;
+namespace Mesalution\LaravelMesms;
 
-use Mesalution\Sms\Contracts\Sms;
-use Mesalution\Sms\Exceptions\SmsException;
+use Mesalution\LaravelMesms\Contracts\Sms;
+use Mesalution\LaravelMesms\Exceptions\SmsException;
 
 class SmsManager
 {

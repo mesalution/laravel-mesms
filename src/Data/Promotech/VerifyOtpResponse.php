@@ -1,6 +1,6 @@
 <?php
 
-namespace Mesalution\Sms\Data\Promotech;
+namespace Mesalution\LaravelMesms\Data\Promotech;
 
 use Spatie\LaravelData\Data;
 

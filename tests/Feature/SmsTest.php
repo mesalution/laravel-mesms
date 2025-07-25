@@ -1,19 +1,19 @@
 <?php
 
-namespace Mesalution\Sms\Tests\Feature;
+namespace Mesalution\LaravelMesms\Tests\Feature;
 
 use PHPUnit\Util\Test;
-use Mesalution\Sms\Sms;
-use Mesalution\Sms\Data\Otp;
-use Mesalution\Sms\SmsManager;
+use Mesalution\LaravelMesms\Sms;
+use Mesalution\LaravelMesms\Data\Otp;
+use Mesalution\LaravelMesms\SmsManager;
 use Orchestra\Testbench\TestCase;
 use Illuminate\Support\Facades\App;
-use Mesalution\Sms\SmsServiceProvider;
+use Mesalution\LaravelMesms\SmsServiceProvider;
 use PHPUnit\Framework\Attributes\Group;
-use Mesalution\Sms\Exceptions\OtpException;
-use Mesalution\Sms\Contracts\Sms as SmsInterface;
-use Mesalution\Sms\Exceptions\VerifyOtpException;
-use Mesalution\Sms\Exceptions\RequestOtpException;
+use Mesalution\LaravelMesms\Exceptions\OtpException;
+use Mesalution\LaravelMesms\Contracts\Sms as SmsInterface;
+use Mesalution\LaravelMesms\Exceptions\VerifyOtpException;
+use Mesalution\LaravelMesms\Exceptions\RequestOtpException;
 
 class SmsTest extends TestCase
 {

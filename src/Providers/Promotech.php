@@ -1,21 +1,21 @@
 <?php
 
-namespace Mesalution\Sms\Providers;
+namespace Mesalution\LaravelMesms\Providers;
 
 use Exception;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Support\Facades\Http;
-use Mesalution\Sms\Contracts\Sms;
-use Mesalution\Sms\Data\Otp;
-use Mesalution\Sms\Data\Promotech\RequestOtpResponse;
-use Mesalution\Sms\Data\Promotech\VerifyOtpResponse;
-use Mesalution\Sms\Exceptions\ConnectionException;
-use Mesalution\Sms\Exceptions\InternalException;
-use Mesalution\Sms\Exceptions\BadResponseException;
-use Mesalution\Sms\Exceptions\ErrorCode;
-use Mesalution\Sms\Exceptions\ExternalException;
-use Mesalution\Sms\Exceptions\InvalidOtpException;
-use Mesalution\Sms\Exceptions\OtpException;
+use Mesalution\LaravelMesms\Contracts\Sms;
+use Mesalution\LaravelMesms\Data\Otp;
+use Mesalution\LaravelMesms\Data\Promotech\RequestOtpResponse;
+use Mesalution\LaravelMesms\Data\Promotech\VerifyOtpResponse;
+use Mesalution\LaravelMesms\Exceptions\ConnectionException;
+use Mesalution\LaravelMesms\Exceptions\InternalException;
+use Mesalution\LaravelMesms\Exceptions\BadResponseException;
+use Mesalution\LaravelMesms\Exceptions\ErrorCode;
+use Mesalution\LaravelMesms\Exceptions\ExternalException;
+use Mesalution\LaravelMesms\Exceptions\InvalidOtpException;
+use Mesalution\LaravelMesms\Exceptions\OtpException;
 use Spatie\LaravelData\Data;
 use Spatie\LaravelData\Exceptions\CannotCreateData;
 use Throwable;

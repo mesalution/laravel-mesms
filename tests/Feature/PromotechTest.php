@@ -1,19 +1,19 @@
 <?php
 
-namespace Mesalution\Sms\Tests\Feature;
+namespace Mesalution\LaravelMesms\Tests\Feature;
 
-use Mesalution\Sms\Data\Otp;
+use Mesalution\LaravelMesms\Data\Otp;
 use Illuminate\Support\Facades\Http;
 use PHPUnit\Framework\Attributes\Test;
-use Mesalution\Sms\Providers\Promotech;
+use Mesalution\LaravelMesms\Providers\Promotech;
 use PHPUnit\Framework\Attributes\Group;
 use Orchestra\Testbench\TestCase;
-use Mesalution\Sms\Exceptions\InternalException;
-use Mesalution\Sms\Exceptions\ConnectionException;
-use Mesalution\Sms\Exceptions\BadResponseException;
-use Mesalution\Sms\Exceptions\ErrorCode;
-use Mesalution\Sms\Exceptions\ExternalException;
-use Mesalution\Sms\Exceptions\OtpException;
+use Mesalution\LaravelMesms\Exceptions\InternalException;
+use Mesalution\LaravelMesms\Exceptions\ConnectionException;
+use Mesalution\LaravelMesms\Exceptions\BadResponseException;
+use Mesalution\LaravelMesms\Exceptions\ErrorCode;
+use Mesalution\LaravelMesms\Exceptions\ExternalException;
+use Mesalution\LaravelMesms\Exceptions\OtpException;
 
 class PromotechTest extends TestCase
 {

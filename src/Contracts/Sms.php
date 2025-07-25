@@ -1,8 +1,8 @@
 <?php
 
-namespace Mesalution\Sms\Contracts;
+namespace Mesalution\LaravelMesms\Contracts;
 
-use Mesalution\Sms\Data\Otp;
+use Mesalution\LaravelMesms\Data\Otp;
 
 interface Sms
 {

@@ -3,11 +3,11 @@ return [
     'driver' => env('SMS_DRIVER', 'promotech'),
     'providers' => [
         'fake' => [
-            'class' => \Mesalution\Sms\Providers\FakeSms::class,
+            'class' => \Mesalution\LaravelMesms\Providers\FakeSms::class,
             'options' => []
         ],
         'promotech' => [
-            'class' => \Mesalution\Sms\Providers\Promotech::class,
+            'class' => \Mesalution\LaravelMesms\Providers\Promotech::class,
             'options' => [
                 'url' => env('PROMOTECH_URL', 'http://apisms.promotech.co.th'),
                 'username' => env('PROMOTECH_USERNAME'),

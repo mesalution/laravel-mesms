@@ -10,18 +10,18 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Mesalution\\Sms\\": "src/"
+            "Mesalution\\LaravelMesms\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Mesalution\\Sms\\Tests\\": "tests/"
+            "Mesalution\\LaravelMesms\\Tests\\": "tests/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Mesalution\\Sms\\SmsServiceProvider"
+                "Mesalution\\LaravelMesms\\SmsServiceProvider"
             ]
         }
     },

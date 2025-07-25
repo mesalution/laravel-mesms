@@ -1,15 +1,15 @@
 <?php
 
-namespace Mesalution\Sms;
+namespace Mesalution\LaravelMesms;
 
 use Throwable;
-use Mesalution\Sms\Data\Otp;
-use Mesalution\Sms\Exceptions\SmsException;
-use Mesalution\Sms\Contracts\Sms as SmsInterface;
-use Mesalution\Sms\Exceptions\OtpException;
-use Mesalution\Sms\Exceptions\ResendOtpException;
-use Mesalution\Sms\Exceptions\VerifyOtpException;
-use Mesalution\Sms\Exceptions\RequestOtpException;
+use Mesalution\LaravelMesms\Data\Otp;
+use Mesalution\LaravelMesms\Exceptions\SmsException;
+use Mesalution\LaravelMesms\Contracts\Sms as SmsInterface;
+use Mesalution\LaravelMesms\Exceptions\OtpException;
+use Mesalution\LaravelMesms\Exceptions\ResendOtpException;
+use Mesalution\LaravelMesms\Exceptions\VerifyOtpException;
+use Mesalution\LaravelMesms\Exceptions\RequestOtpException;
 
 class Sms
 {

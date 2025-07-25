@@ -1,6 +1,6 @@
 <?php
 
-namespace Mesalution\Sms\Data;
+namespace Mesalution\LaravelMesms\Data;
 
 use Spatie\LaravelData\Data;
 

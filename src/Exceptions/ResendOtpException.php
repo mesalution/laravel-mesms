@@ -1,6 +1,6 @@
 <?php
 
-namespace Mesalution\Sms\Exceptions;
+namespace Mesalution\LaravelMesms\Exceptions;
 
 class ResendOtpException extends SmsException
 {

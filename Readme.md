@@ -31,7 +31,7 @@ composer require mesalution/laravel-mesms
 Publish the config:
 
 ```bash
-php artisan vendor:publish --provider="Mesalution\Sms\SmsServiceProvider"
+php artisan vendor:publish --provider="Mesalution\LaravelMesms\SmsServiceProvider"
 ```
 Edit `config/sms.php`:
 ```bash
@@ -39,11 +39,11 @@ return [
     'driver' => env('SMS_DRIVER', 'promotech'),
     'providers' => [
         'fake' => [
-            'class' => \Mesalution\Sms\Providers\FakeSms::class,
+            'class' => \Mesalution\LaravelMesms\Providers\FakeSms::class,
             'options' => []
         ],
         'promotech' => [
-            'class' => \Mesalution\Sms\Providers\Promotech::class,
+            'class' => \Mesalution\LaravelMesms\Providers\Promotech::class,
             'options' => [
                 'url' => env('PROMOTECH_URL', 'http://apisms.promotech.co.th'),
                 'username' => env('PROMOTECH_USERNAME'),
@@ -68,7 +68,7 @@ PROMOTECH_SENDER_NAME={{senderName}}
 ## Usage
 Create instance from `app()` helper
 ```bash
-use Mesalution\Sms\Sms;
+use Mesalution\LaravelMesms\Sms;
 
 $sms = app(Sms::class);
 
@@ -79,7 +79,7 @@ $sms->resendOTP('otp-id-xxx');
 ```
 Manual create instance
 ```bash
-use Mesalution\Sms\Sms;
+use Mesalution\LaravelMesms\Sms;
 
 $options = [
     'username'=>'{{username}}',
@@ -96,7 +96,7 @@ $sms->resendOTP('otp-id-xxx');
 ```
 Inject in controller
 ```bash
-use Mesalution\Sms\Sms;
+use Mesalution\LaravelMesms\Sms;
 
 class ExampleController extends Controller
 {
@@ -112,10 +112,10 @@ class ExampleController extends Controller
 ```
 
 ## How to implement new driver
-Driver must be implement interface `Mesalution\Sms\Contract\Sms`
+Driver must be implement interface `Mesalution\LaravelMesms\Contract\Sms`
 ```bash
-use Mesalution\Sms\Contracts\Sms;
-use Mesalution\Sms\Data\Otp;
+use Mesalution\LaravelMesms\Contracts\Sms;
+use Mesalution\LaravelMesms\Data\Otp;
 
 class MySmsDriver implements Sms
 {
@@ -157,7 +157,7 @@ You can use try-catch for handle:
 ```bash
 try {
     $sms->verifyOTP('otp-id', '000000');
-} catch (\Mesalution\Sms\Exceptions\VerifyOtpException $e) {
+} catch (\Mesalution\LaravelMesms\Exceptions\VerifyOtpException $e) {
     // จัดการกรณี otp ผิด
 }
 
