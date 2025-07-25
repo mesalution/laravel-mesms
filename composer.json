@@ -1,5 +1,5 @@
 {
-    "name": "mesalution/sms",
+    "name": "mesalution/laravel-mesms",
     "description": "A simple laravel package that helps you send SMS though various service providers",
     "type": "library",
     "require": {

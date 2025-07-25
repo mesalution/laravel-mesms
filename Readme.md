@@ -24,7 +24,7 @@
 ## Installation
 
 ```bash
-composer require mesalution/sms
+composer require mesalution/laravel-mesms
 ```
 
 ## Configuration
