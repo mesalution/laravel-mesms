@@ -4,7 +4,9 @@ return [
     'providers' => [
         'fake' => [
             'class' => \Mesalution\LaravelMesms\Providers\FakeSms::class,
-            'options' => []
+            'options' => [
+                'validOtp' => '123456',
+            ]
         ],
         'promotech' => [
             'class' => \Mesalution\LaravelMesms\Providers\Promotech::class,
