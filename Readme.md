@@ -1,7 +1,7 @@
 # Mesalution - Laravel SMS
 
-[![Latest Version](https://img.shields.io/github/v/tag/mesalution/sms?label=version&sort=semver)](https://github.com/mesalution/sms/releases)
-[![License](https://img.shields.io/github/license/mesalution/sms)](LICENSE)
+[![Latest Version](https://img.shields.io/github/v/tag/mesalution/laravel-mesms?label=version&sort=semver)](https://github.com/mesalution/laravel-mesms/releases)
+[![License](https://img.shields.io/github/license/mesalution/laravel-mesms)](LICENSE)
 
 
 แพ็กเกจ Laravel สำหรับส่งและจัดการ OTP ผ่านผู้ให้บริการ SMS ได้หลายเจ้า รองรับการเปลี่ยน driver ได้ง่าย และรองรับการเขียน fake สำหรับการทดสอบ
